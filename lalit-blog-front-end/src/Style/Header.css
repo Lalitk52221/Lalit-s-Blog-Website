@@ -1,0 +1,54 @@
+.header {
+  width: 100vw;
+  height: 75px;
+  border-bottom: 1px solid lightgray;
+  padding:15px 20px;
+  box-shadow: 0.5px 0.5px 15px rgba(0, 0, 0, 0.2);
+  background-color: #8ec5fc;
+  background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
+  position: fixed;
+  z-index: 1;
+
+}
+.header .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header .navbar h2 {
+  color: #c850c0;
+  cursor: pointer;
+}
+
+.header .navbar ul {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 30px;
+  font-weight: 500;
+}
+.header .navbar .active , .logout-btn, .account-name{
+    background-color: rgb(11, 99, 242);
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    text-transform: capitalize;
+}
+.header .navbar .logout-btn{
+  background-color: rgb(169, 0, 0);
+}
+.header .navbar ul li {
+  list-style-type: none;
+  cursor: pointer;
+  position: relative;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+.header .navbar input{
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}

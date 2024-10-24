@@ -1,0 +1,20 @@
+.profile{
+    background-color: rgb(39, 132, 253);
+    position: absolute;
+    right: 10px;
+    top: 65px;
+    border-radius: 10px;
+    padding: 10px;
+    /* color: white; */
+    font-size: 15px;
+}
+.profile ul li{
+    list-style-type: none;
+    color: white;
+    border-bottom: 1px solid white;
+    padding: 5px 0;
+    cursor: pointer;
+}
+.profile ul li:last-child{
+    border-bottom: none;
+}
