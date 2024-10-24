@@ -13,7 +13,7 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:4000/api/users/signup", {
+      const response = await fetch("https://blogifyr1-backend.onrender.com/api/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

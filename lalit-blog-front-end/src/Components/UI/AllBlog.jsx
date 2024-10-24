@@ -9,7 +9,7 @@ const AllBlog = () => {
   const dispatch = useDispatch()
   const fetchBlog = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/blog", {
+      const response = await fetch("https://blogifyr1-backend.onrender.com/api/blog", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
