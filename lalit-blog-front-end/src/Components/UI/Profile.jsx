@@ -1,17 +1,21 @@
 import React from 'react'
 import '../../Style/Profile.css'
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { hideNavItem } from '../Redux/Slicer';
+import { hideNavItem, toggleMenu } from '../Redux/Slicer';
 
 const Profile = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+    
     const handleLogout = () => {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("name");
-        Navigate("/login");
+        navigate("/login");
         dispatch(hideNavItem());
+        dispatch(toggleMenu(false))
       };
+
   return (
     <div className='profile'>
         <ul>

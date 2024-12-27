@@ -33,13 +33,13 @@
     color: white;
     border-radius: 10px;
     text-transform: capitalize;
+    cursor: pointer;
 }
 .header .navbar .logout-btn{
   background-color: rgb(169, 0, 0);
 }
 .header .navbar ul li {
   list-style-type: none;
-  cursor: pointer;
   position: relative;
 }
 a{

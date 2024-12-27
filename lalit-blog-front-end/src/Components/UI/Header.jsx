@@ -1,29 +1,47 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../../Style/Header.css";
 import { useDispatch, useSelector } from "react-redux";
-import { hideNavItem } from "../Redux/Slicer";
-import { useState } from "react";
+import { useEffect, useRef, useState} from "react";
 import Profile from "./Profile";
+import {toggleMenu } from "../Redux/Slicer";
 const Header = () => {
   const AccountName = sessionStorage.getItem("name");
-  const navigate = useNavigate();
   const Navbar = useSelector((state) => state.navbarItem.value);
-  const dispatch = useDispatch();
-  const [profile, setProfile] = useState(false);
+  const isMenuOpen = useSelector((state)=>state.navbarItem.isMenuOpen);
+  const [menuOpen,setMenuOpen] = useState(false)
+  const menuRef = useRef(null);
+  const dispatch = useDispatch()
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("name");
-    navigate("/login");
-    dispatch(hideNavItem());
-  };
   const handleProfile = () => {
-    if (profile === false) {
-      setProfile(true);
-    } else {
-      setProfile(false);
+      // if(menuOpen){
+      //   setMenuOpen(true)
+      //   dispatch(toggleMenu(true))
+      // }else{
+      //   setMenuOpen(false)
+      //   dispatch(toggleMenu(false));
+      // }
+      setMenuOpen(prev=> !prev)
+      dispatch(toggleMenu(!menuOpen))
+      console.log(menuOpen, isMenuOpen)
+  };
+
+  const handleClickOutside = (e) => {
+    if (menuRef.current && !menuRef.current.contains(e.target)) {
+      setMenuOpen(false)
+      dispatch(toggleMenu(false))
     }
   };
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
 
   return (
     <div className="header">
@@ -32,9 +50,7 @@ const Header = () => {
           {" "}
           <h2 className="logo">Blogifyr</h2>
         </NavLink>
-        {Navbar === false ? (
-          ""
-        ) : (
+        {Navbar &&
           <ul>
             <NavLink to="/write-blog">
               {" "}
@@ -49,18 +65,14 @@ const Header = () => {
             <li>
               <input type="search" placeholder="search" />
             </li>
-            <li className="logout-btn" onClick={handleLogout}>
-              Logout
-            </li>
             <button className="account-name" onClick={handleProfile}>
               <li>{AccountName}</li>
             </button>
           </ul>
-        )}
+        }
       </nav>
-      {profile && (
-        <div>
-          {" "}
+      {isMenuOpen && (
+        <div ref={menuRef}>
           <Profile />
         </div>
       )}

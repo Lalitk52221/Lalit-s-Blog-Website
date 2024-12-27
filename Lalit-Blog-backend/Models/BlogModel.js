@@ -12,7 +12,7 @@ const BlogSchema = new mongoose.Schema({
   },
   photourl:{
     type:"String",
-    required:[true,"Enter any Photo URL"]
+    // required:[true,"Enter any Photo URL"]
   }
 });
 

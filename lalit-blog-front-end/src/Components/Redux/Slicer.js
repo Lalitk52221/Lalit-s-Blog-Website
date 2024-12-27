@@ -1,20 +1,34 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    value:false,
-}
+  value: false,
+  isMenuOpen: false,
+  isUpdatePage: false,
+};
 export const Slice = createSlice({
-    name:"navbarItem",
-    initialState,
-    reducers:{
-        showNavItem : (state)=>{
-            state.value = true
-        },
-        hideNavItem :(state)=>{
-            state.value = false
-        }
-    }
-})
+  name: "navbarItem",
+  initialState,
+  reducers: {
+    showNavItem: (state) => {
+      state.value = true;
+    },
+    hideNavItem: (state) => {
+      state.value = false;
+    },
+    toggleMenu: (state,action) => {
+      state.isMenuOpen = action.payload;
+    },
 
-export const {showNavItem, hideNavItem} = Slice.actions
-export default Slice.reducer
+    updatePage: (state, action) => {
+      state.isUpdatePage = action.payload;
+    },
+  },
+});
+
+export const {
+  showNavItem,
+  hideNavItem,
+  toggleMenu,
+  updatePage,
+} = Slice.actions;
+export default Slice.reducer;

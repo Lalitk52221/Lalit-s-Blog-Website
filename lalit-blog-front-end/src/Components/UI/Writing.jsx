@@ -16,7 +16,7 @@ const Writing = () => {
       setLoading(true);
       setError(null);
       const response = await fetch(
-        "https://blogifyr1-backend.onrender.com/api/blog/createblog",
+        "http://localhost:4000/api/blog/createblog",
         {
           method: "POST",
           headers: {
@@ -49,6 +49,7 @@ const Writing = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Type your Blog Title here"
+          required
         />
         <textarea
           name=""
@@ -57,6 +58,7 @@ const Writing = () => {
           value={blogtext}
           onChange={(e) => setBlogtest(e.target.value)}
           placeholder="start typing here"
+          required
         />
 
         <input
@@ -66,6 +68,7 @@ const Writing = () => {
           value={photourl}
           onChange={(e) => setPhotourl(e.target.value)}
           placeholder="Paste Photo URl"
+          required
         />
 
         <button type="submit">Post </button>

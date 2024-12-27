@@ -1,16 +1,9 @@
 .home {
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  padding: 30px;
-  grid-column-gap: 30px;
-  grid-row-gap: 30px; */
-  /* max-width: 450px; */
   padding-top: 95px;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   gap: 25px;
-  /* text-align: center; */
   justify-content: center;
   position: relative;
 }
@@ -27,7 +20,6 @@
   border-radius: 10px;
 }
 .home .blog-card h3{
-  /* text-align: center; */
   border-bottom: 1px solid gray;
   border-top: 1px solid gray;
   text-transform: capitalize;
@@ -49,7 +41,6 @@
   cursor: pointer;
   display: flex;
   gap: 10px;
-  /* display: none; */
 }
 .home .edit-blog:hover{
   background-color: white;

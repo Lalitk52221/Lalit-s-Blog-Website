@@ -16,7 +16,7 @@ const Login = () => {
     e.preventDefault();
     try {
       setLoading(true)
-      const response = await fetch("https://blogifyr1-backend.onrender.com/api/users/login", {
+      const response = await fetch("http://localhost:4000/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,7 +34,7 @@ const Login = () => {
         return;
       }
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
 
     sessionStorage.setItem("token", data.token);
     sessionStorage.setItem("name", data.name);
@@ -44,6 +44,7 @@ const Login = () => {
     } catch (err) {
       window.alert(err.message);
       setError(err.message);
+      setLoading(false)
     }
   };
   // const handleSignup = () => {};

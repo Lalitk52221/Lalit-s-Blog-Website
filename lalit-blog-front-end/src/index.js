@@ -11,6 +11,7 @@ import Signup from "./Components/Pages/Signup";
 import AllBlog from "./Components/UI/AllBlog";
 import { Provider } from "react-redux";
 import { Store } from "./Components/Redux/Store";
+import UpdateBlog from "./Components/UI/UpdateBlog";
 const createRoutes = createBrowserRouter([
   {
     path: "/",
@@ -27,7 +28,6 @@ const createRoutes = createBrowserRouter([
             <AllBlog />,
           </ProtectedRoute>
         ),
-        // element:<Home/>
       },
       {
         path: "/login",
@@ -46,6 +46,14 @@ const createRoutes = createBrowserRouter([
         ),
       },
       {
+        path: "/update-blog",
+        element: (
+          <ProtectedRoute>
+            <UpdateBlog />,
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "/myblog",
         element: (
           <ProtectedRoute>
@@ -58,7 +66,7 @@ const createRoutes = createBrowserRouter([
         element: (
           <div>
             {" "}
-            <h1> Page not Found</h1>
+            <h1> <br/><br/>Page not Found</h1>
           </div>
         ),
       },
