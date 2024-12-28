@@ -16,7 +16,7 @@ const Writing = () => {
       setLoading(true);
       setError(null);
       const response = await fetch(
-        "http://localhost:4000/api/blog/createblog",
+        "https://lalit-blog-backend.onrender.com/api/blog/createblog",
         {
           method: "POST",
           headers: {

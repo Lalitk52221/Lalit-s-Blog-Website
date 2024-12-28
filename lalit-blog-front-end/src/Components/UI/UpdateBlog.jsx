@@ -15,7 +15,7 @@ const UpdateBlog = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const BlogURL = "http://localhost:4000/api/blog";
+  const BlogURL = "https://lalit-blog-backend.onrender.com/api/blog";
     
 
   const handleUpdate = async (e) => {

@@ -15,18 +15,18 @@ import UpdateBlog from "./Components/UI/UpdateBlog";
 const createRoutes = createBrowserRouter([
   {
     path: "/",
-    element:(
+    element: (
       <Provider store={Store}>
-      <App />,
+        <App />
       </Provider>
-    ) ,
+    ),
     children: [
       {
         path: "/",
         element: (
-          <ProtectedRoute>
-            <AllBlog />,
-          </ProtectedRoute>
+          // <ProtectedRoute>
+            <AllBlog />
+          // </ProtectedRoute>
         ),
       },
       {
@@ -57,7 +57,7 @@ const createRoutes = createBrowserRouter([
         path: "/myblog",
         element: (
           <ProtectedRoute>
-            <AllBlog/>
+            <AllBlog />
           </ProtectedRoute>
         ),
       },
@@ -66,12 +66,17 @@ const createRoutes = createBrowserRouter([
         element: (
           <div>
             {" "}
-            <h1> <br/><br/>Page not Found</h1>
+            <h1>
+              {" "}
+              <br />
+              <br />
+              Page not Found
+            </h1>
           </div>
-        ),
-      },
-    ],
-  },
+        )
+      }
+    ]
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

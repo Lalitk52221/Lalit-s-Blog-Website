@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Loading from "./Loading";
 const AllBlog = () => {
 
-  const BlogURL = "http://localhost:4000/api/blog";
+  const BlogURL = "https://lalit-blog-backend.onrender.com/api/blog";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [fetchData, setFetchData] = useState([]);
