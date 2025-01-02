@@ -4,6 +4,7 @@ const initialState = {
   value: false,
   isMenuOpen: false,
   isUpdatePage: false,
+  progress:0,
 };
 export const Slice = createSlice({
   name: "navbarItem",
@@ -22,6 +23,9 @@ export const Slice = createSlice({
     updatePage: (state, action) => {
       state.isUpdatePage = action.payload;
     },
+    updateProgress: (state, action) => {
+      state.progress = action.payload;
+    }
   },
 });
 
@@ -30,5 +34,6 @@ export const {
   hideNavItem,
   toggleMenu,
   updatePage,
+  updateProgress
 } = Slice.actions;
 export default Slice.reducer;

@@ -1,34 +1,38 @@
 import React, { useEffect, useState } from "react";
 import "../../Style/AllBlog.css";
 import { useDispatch } from "react-redux";
-import { showNavItem, updatePage } from "../Redux/Slicer";
+import { showNavItem, updatePage, updateProgress } from "../Redux/Slicer";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import Loading from "./Loading";
+// import Loading from "./Loading";
+import CardSceleton from "./CardSceleton";
 const AllBlog = () => {
-
   const BlogURL = "https://lalit-blog-backend.onrender.com/api/blog";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [fetchData, setFetchData] = useState([]);
   const [error, setError] = useState("");
-  
+
   const fetchBlog = async () => {
     try {
+      dispatch(updateProgress(10));
       const response = await fetch(BlogURL, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
-      if(!response.ok){
-        throw new Error("Failed to fetch blog")
+      if (!response.ok) {
+        throw new Error("Failed to fetch blog");
       }
       const data = await response.json();
       dispatch(showNavItem(true));
+      dispatch(updateProgress(50));
       setFetchData(data.data.Blogs);
+      dispatch(updateProgress(100));
     } catch (err) {
       setError(err.message);
+      dispatch(updateProgress(100));
     }
   };
 
@@ -45,58 +49,63 @@ const AllBlog = () => {
           "Content-Type": "application/json",
         },
       });
-      
+
       if (!response.ok) {
-      const data = await response.json();
-      throw new Error(data.message || "Failed to delete blog")
+        const data = await response.json();
+        throw new Error(data.message || "Failed to delete blog");
       }
-        setFetchData((prevBlogs) =>
-          prevBlogs.filter((blog) => blog._id !== id)
-        );
-      
+      setFetchData((prevBlogs) => prevBlogs.filter((blog) => blog._id !== id));
     } catch (err) {
       setError(err.message);
     }
   };
- 
-  const handleEdit = (blog) => {
-    const confirmUpdate = window.confirm("Are you sure want to udpate your blog")
-    if(!confirmUpdate) return
-    dispatch(updatePage(true))
-    navigate("/update-blog", { state: { blog } });
 
+  const handleEdit = (blog) => {
+    const confirmUpdate = window.confirm(
+      "Are you sure want to udpate your blog"
+    );
+    if (!confirmUpdate) return;
+    dispatch(updatePage(true));
+    navigate("/update-blog", { state: { blog } });
   };
-  
+
   useEffect(() => {
     fetchBlog();
   }, []);
+
   return (
     <div className="home">
-      {fetchData.length > 0?(
-       fetchData.map((data) => (
-        <div key={data._id} className="blog-card">
-          <div className="edit-del">
-            <MdDelete
-              className="del-blog"
-              onClick={() => handleDelete(data._id)}
-              aria-label="Delete-blog"
-            />
-            <MdEdit
-              className="edit-blog"
-              onClick={() => handleEdit(data)}
-              aria-label="edit-blog"
-            />
+      {/* <CardSceleton/> */}
+      {fetchData.length > 0 ? (
+        fetchData.map((data) => (
+          <div key={data._id} className="blog-card">
+            <div className="edit-del">
+              <MdDelete
+                className="del-blog"
+                onClick={() => handleDelete(data._id)}
+                aria-label="Delete-blog"
+              />
+              <MdEdit
+                className="edit-blog"
+                onClick={() => handleEdit(data)}
+                aria-label="edit-blog"
+              />
+            </div>
+            <img src={data.photourl} alt="" />
+            <h3>{data.title} </h3>
+            <p style={{ whiteSpace: "pre-wrap" }}>
+              {" "}
+              {data.blogtext && data.blogtext.trim()}{" "}
+            </p>
           </div>
-          <img src={data.photourl} alt="" />
-          <h3>{data.title} </h3>
-          <p style={{ whiteSpace: "pre-wrap" }}>
-            {" "}
-            {data.blogtext && data.blogtext.trim()}{" "}
-          </p>
-        </div>
-      )) 
-      ):<p> <Loading/></p>}
-      
+        ))
+      ) : (
+        <>
+          {/* <Loading/> */}
+          <CardSceleton />
+        </>
+      )}
+
       {error && <p>{error}</p>}
     </div>
   );
